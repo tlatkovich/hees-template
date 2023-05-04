@@ -1,0 +1,14 @@
+dotnet new sln
+
+func init Fxs.FileTransfers.BillTrust --dotnet 
+dotnet sln add ./Fxs.FileTransfers.BillTrust/Fxs_FileTransfers_BillTrust.csproj
+
+cd Fxs.FileTransfers.BillTrust
+
+dotnet user-secrets init
+dotnet user-secrets set "Delete" "Me"
+
+# func new --language C# --template "Http trigger" --name HelloWord
+# func new --language C# --template "HTTP trigger" --name HttpExample --authlevel "anonymous"
+# func new --language C# --template "Timer trigger" --name HelloTimer
+# func new --language C# --template "Service Bus Queue trigger" --name MyServicebusTrigger 
