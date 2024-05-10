@@ -1,0 +1,60 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Api.DomainName/Api.DomainName.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build: debug",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "hees/api/domainname:local",
+                "target": "base",
+                "dockerfile": "${workspaceFolder}/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Api.DomainName/Api.DomainName.csproj"
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: debug",
+            "dependsOn": [
+                "docker-build: debug"
+            ],
+            "dockerRun": {
+                "ports": [
+                    {
+                        "containerPort": 80,
+                        "hostPort": 5669
+                    }
+                ],
+                "env": {
+                    "ASPNETCORE_ENVIRONMENT": "Local",
+                    "ASPNETCORE_URLS": "http://+",
+                    "APPINSIGHTS_INSTRUMENTATIONKEY": "",
+                    "ASPNETCORE_APPCONFIG_URI": "https://cd1-ea-hees-cfg2.azconfig.io",
+                    "ASPNETCORE_APPCONFIG_REPLICA_URI": "https://cd1-ea-hees-cfg2-cd2replica.azconfig.io"
+                }
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Api.DomainName/Api.DomainName.csproj",
+                "enableDebugging": true
+            }
+        }
+    ]
+}
