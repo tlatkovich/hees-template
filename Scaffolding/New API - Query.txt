@@ -1,12 +1,12 @@
 dotnet new sln
 
-dotnet new webapi -o Api.Validations.Query
-dotnet sln add ./Api.Validations.Query/Api.Validations.Query.csproj
+dotnet new webapi -o Api.DomainName.Query
+dotnet sln add ./Api.DomainName.Query/Api.DomainName.Query.csproj
 
-dotnet new classlib -o Api.Validations.Query.Data
-dotnet sln add ./Api.Validations.Query.Data/Api.Validations.Query.Data.csproj
+dotnet new classlib -o Api.DomainName.Query.Data
+dotnet sln add ./Api.DomainName.Query.Data/Api.DomainName.Query.Data.csproj
 
-cd Api.Validations.Query
+cd Api.DomainName.Query
 
 dotnet user-secrets init
 dotnet user-secrets set "Test" "Test"

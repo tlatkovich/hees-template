@@ -1,15 +1,15 @@
 dotnet new sln
 
-dotnet new webapi -o Api.Validations.Public
-dotnet sln add ./Api.Validations.Public/Api.Validations.Public.csproj
+dotnet new webapi -o Api.DomainName.Public
+dotnet sln add ./Api.DomainName.Public/Api.DomainName.Public.csproj
 
-dotnet new classlib -o Api.Validations.Public.Data
-dotnet sln add ./Api.Validations.Public.Data/Api.Validations.Public.Data.csproj
+dotnet new classlib -o Api.DomainName.Public.Data
+dotnet sln add ./Api.DomainName.Public.Data/Api.DomainName.Public.Data.csproj
 
-cd Api.Validations.Public
+cd Api.DomainName.Public
 
 dotnet user-secrets init
-dotnet user-secrets set "Test" "Test"
+dotnet user-secrets set "DeleteMe" "Used for scaffolding only"
 
 
 
